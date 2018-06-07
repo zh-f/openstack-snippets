@@ -43,7 +43,11 @@ def check_services():
     servicegroup_api = servicegroup.API()
     api_services = ('nova-osapi_compute', 'nova-ec2', 'nova-metadata')
     isOK = True
+<<<<<<< HEAD
     print "======================= services check ======================="
+=======
+    print "============================ services check ============================"
+>>>>>>> 3e8d07ccfc2b77d50e06ec0dd77a0b6f32cb9ca1
     for s in host_api.service_get_all(cxt, set_zones=True, all_cells=True):
         if s['binary'] in api_services:
             continue
@@ -59,9 +63,14 @@ def check_services():
 
 def print_hypervisor_view():
     hm = host_manager.HostManager()
+<<<<<<< HEAD
     tbl = PrettyTable(["hostname", "nodename", "updated", "ip", "cpu",
                        "cpu_ratio", "ram", "ram_ratio", "vms", "active_vms",
                        "other_vms"])
+=======
+    tbl = PrettyTable(["hostname", "nodename", "updated", "ip", "cpu", "cpu_ratio",
+                       "ram", "ram_ratio", "vms", "active_vms", "other_vms"])
+>>>>>>> 3e8d07ccfc2b77d50e06ec0dd77a0b6f32cb9ca1
     tbl.align['hostname'] = 'l'
     tbl.align['ip'] = 'l'
     states = hm.get_all_host_states(cxt)
@@ -70,8 +79,12 @@ def print_hypervisor_view():
         #    print "cpu is %s and nodename is %s" % (cpu, i.nodename)
         vcpus_total = i.vcpus_total or i.vcpus_used
         if vcpus_total:
+<<<<<<< HEAD
             cpu_ratio = colorizer(
                 i.vcpus_used * 100.0 / (vcpus_total * i.cpu_allocation_ratio))
+=======
+            cpu_ratio = colorizer(i.vcpus_used * 100.0 / (vcpus_total * i.cpu_allocation_ratio))
+>>>>>>> 3e8d07ccfc2b77d50e06ec0dd77a0b6f32cb9ca1
         else:
             cpu_ratio = '-'
 
@@ -79,9 +92,13 @@ def print_hypervisor_view():
         ram = "%s/%s" % (ram_used, i.total_usable_ram_mb)
         total_usable_ram_mb = i.total_usable_ram_mb or ram_used
         if total_usable_ram_mb:
+<<<<<<< HEAD
             ram_ratio = colorizer(
                 ram_used * 100.0 /
                 (i.total_usable_ram_mb * i.ram_allocation_ratio))
+=======
+            ram_ratio = colorizer(ram_used * 100.0 / (i.total_usable_ram_mb * i.ram_allocation_ratio))
+>>>>>>> 3e8d07ccfc2b77d50e06ec0dd77a0b6f32cb9ca1
         else:
             ram_ratio = '-'
 
@@ -97,15 +114,25 @@ def print_hypervisor_view():
                      cpu, cpu_ratio,
                      ram, ram_ratio,
                      num_instances, num_vm_active, num_vm_others])
+<<<<<<< HEAD
     print "======================= Hypervisor resource ======================="
+=======
+    print "============================ Hypervisor resource ============================"
+>>>>>>> 3e8d07ccfc2b77d50e06ec0dd77a0b6f32cb9ca1
     print tbl.get_string(sortby="ip")
 
 
 def alloction_check():
+<<<<<<< HEAD
     print "====================== alloction check ======================"
 
     tbl = PrettyTable(["status", "hostname", "nodename", "vm_in_nodes",
                        "vm_in_allocations"])
+=======
+    print "============================ alloction check ============================"
+
+    tbl = PrettyTable(["status", "hostname", "nodename", "vm_in_nodes", "vm_in_allocations"])
+>>>>>>> 3e8d07ccfc2b77d50e06ec0dd77a0b6f32cb9ca1
     tbl.align['hostname'] = 'l'
     tbl.align['nodename'] = 'l'
     hm = host_manager.HostManager()
@@ -116,8 +143,12 @@ def alloction_check():
         node_vm_map.setdefault(rp.name, set())
         # import pdb;pdb.set_trace()
         for j in i.instances:
+<<<<<<< HEAD
             # Note(fanzhang): j should one Instance object
             # which means instance on node.
+=======
+            # Note(fanzhang): j should one Instance object which means instance on node.
+>>>>>>> 3e8d07ccfc2b77d50e06ec0dd77a0b6f32cb9ca1
             inst = i.instances[j]
             node_name = inst.node
             node_vm_map.setdefault(node_name, set())
@@ -133,6 +164,7 @@ def alloction_check():
             hint = "%s%s\033[0m" % (color_tbl['green'], 'OK')
             hostname = "%s%s\033[0m" % (color_tbl['blue'], i.host)
             nodename = "%s%s\033[0m" % (color_tbl['yellow'], i.nodename)
+<<<<<<< HEAD
             # print msg % (color_tbl['green'], i.host, i.nodename,
             # len(vm_in_nodes), len(vms_in_allocation))
         else:
@@ -141,6 +173,14 @@ def alloction_check():
             nodename = "%s%s\033[0m" % (color_tbl['yellow'], i.nodename)
             # print msg % (color_tbl['red'], i.host, i.nodename,
             # len(vm_in_nodes), len(vms_in_allocation))
+=======
+            # print msg % (color_tbl['green'], i.host, i.nodename, len(vm_in_nodes), len(vms_in_allocation))
+        else:
+            hint = "%s%s\033[0m" % (color_tbl['red'], 'X')
+            hostname = "%s%s\033[0m" % (color_tbl['red'], i.host)
+            nodename = "%s%s\033[0m" % (color_tbl['red'], i.nodename)
+            # print msg % (color_tbl['red'], i.host, i.nodename, len(vm_in_nodes), len(vms_in_allocation))
+>>>>>>> 3e8d07ccfc2b77d50e06ec0dd77a0b6f32cb9ca1
             # print vms_in_allocation - vm_in_nodes
             # print vm_in_nodes - vms_in_allocation
         tbl.add_row([hint, hostname, nodename, len(vm_in_nodes), len(vms_in_allocation)])
