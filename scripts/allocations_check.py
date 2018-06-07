@@ -141,12 +141,11 @@ def alloction_check():
             nodename = "%s%s\033[0m" % (color_tbl['yellow'], i.nodename)
             # print msg % (color_tbl['red'], i.host, i.nodename,
             # len(vm_in_nodes), len(vms_in_allocation))
-            # print vms_in_allocation - vm_in_nodes
-            # print vm_in_nodes - vms_in_allocation
-        tbl.add_row([hint, hostname, nodename, len(vm_in_nodes), len(vms_in_allocation)])
+            # print msg % (color_tbl['green'], i.host, i.nodename, len(vm_in_nodes), len(vms_in_allocation))
+        tbl.add_row([hint, hostname, nodename, 
+                     len(vm_in_nodes), len(vms_in_allocation)])
 
     print tbl.get_string(sortby='hostname')
-
 
 check_services()
 print_hypervisor_view()
